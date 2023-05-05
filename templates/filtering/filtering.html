@@ -1,0 +1,63 @@
+{% extends 'filtering/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container" data-inline-type="medium">
+        <div id="search-container">
+            <input
+              type="search"
+              id="search-input"
+              placeholder="Search product name here.."
+            />
+            <button id="search">Search</button>
+        </div>
+        <form id="test-form">
+          {% csrf_token %}
+        </form>
+        <div id="buttons">
+            <button class="button-value" onclick="filterProduct('all')">All</button>
+            <button class="button-value" onclick="filterProduct('youtube')">YouTube</button>
+            <button class="button-value" onclick="filterProduct('tiktok')">Tiktok</button>
+            <button class="button-value" onclick="filterProduct('instagram')">Instagram</button>
+        </div>
+        <div id="buttons_level">
+            <button class="button-value" onclick="filterProduct('high')">High</button>
+            <button class="button-value" onclick="filterProduct('mediumhigh')">MediumHigh</button>
+            <button class="button-value" onclick="filterProduct('medium')">Medium</button>
+            <button class="button-value" onclick="filterProduct('mediumlow')">MediumLow</button>
+            <button class="button-value" onclick="filterProduct('low')">Low</button>
+        </div>
+    </div>
+    <div id="allindi" class="container allindi" data-inline-type="medium">
+        {% for d in data %}
+{#            <div class="container indi">#}
+            <button type="button" class="container indi" data-toggle="modal" data-target="#{{ d.name }}" onclick="showPopUp()">
+              <p class="text-center">{{ d.name }}</p>
+            </button>
+{#            </div>#}
+            <div class="modal fade" id="{{ d.name }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ d.name }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Account Name: {{ d.accountName }}</p>
+                        <ul>
+                            <li>Account Type: <span>{{ d.accountType }}</span></li>
+                            <li>Level of Influence: <span>{{ d.level }}</span></li>
+                            <li>Audience Country: <span>{{ d.audience }}</span></li>
+                            <li>Followers: <span>{{ d.followers }}</span></li>
+                            <li>Viewers: <span>{{ d.viewers }}</span></li>
+                            <li>Comments: <span>{{ d.comments }}</span></li>
+                            <li>Likes: <span>{{ d.likes }}</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
