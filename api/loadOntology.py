@@ -1,6 +1,6 @@
 from owlready2 import *
 
-onto_path.append("/home/nazmul/Documents/GitHub/CSE400/Protege")
+onto_path.append("C:\\Users\\skb45\\OneDrive - BUET\\Documents\\GitHub\\CSE400\Protege")
 onto = get_ontology("http://www.semanticweb.org/user/ontologies/2022/11/Social_Influencer_V_1#")
 onto.load()
 
